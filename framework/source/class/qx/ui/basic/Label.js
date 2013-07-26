@@ -294,7 +294,8 @@ qx.Class.define("qx.ui.basic.Label",
 
     // overridden
     _createContentElement : function() {
-      return new qx.html.Label;
+      //return new qx.html.Label;
+      return qxWeb(qx.bom.Label.create());
     },
 
 
@@ -310,7 +311,9 @@ qx.Class.define("qx.ui.basic.Label",
       if (value) {
         this.getContentElement().setStyle("color", qx.theme.manager.Color.getInstance().resolve(value));
       } else {
-        this.getContentElement().removeStyle("color");
+        //this.getContentElement().removeStyle("color");
+        // TODO: is black really the default color?
+        this.getContentElement().setStyle("color", "black");
       }
     },
 
@@ -461,7 +464,8 @@ qx.Class.define("qx.ui.basic.Label",
     _applyRich : function(value)
     {
       // Sync with content element
-      this.getContentElement().setRich(value);
+      // TODO
+      //this.getContentElement().setRich(value);
 
       // Mark text size cache as invalid
       this.__invalidContentSize = true;
@@ -528,7 +532,7 @@ qx.Class.define("qx.ui.basic.Label",
     _applyValue : function(value, old)
     {
       // Sync with content element
-      this.getContentElement().setValue(value);
+      this.getContentElement().setHtml(value);
 
       // Mark text size cache as invalid
       this.__invalidContentSize = true;

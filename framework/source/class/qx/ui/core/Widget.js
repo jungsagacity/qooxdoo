@@ -35,6 +35,8 @@
  * @use(qx.ui.core.EventHandler)
  * @use(qx.event.handler.DragDrop)
  * @asset(qx/static/blank.gif)
+ * @require(qx.module.Core)
+ * @require(qx.module.Compat)
  *
  * @ignore(qx.ui.root.Inline)
  */
@@ -937,13 +939,13 @@ qx.Class.define("qx.ui.core.Widget",
       var content = this.getContentElement();
 
       if (this.$$parent && !this.$$parent.$$disposed) {
-        this.$$parent.getContentElement().remove(content);
+        content.remove();
       }
 
       this.$$parent = parent || null;
 
       if (parent && !parent.$$disposed) {
-        this.$$parent.getContentElement().add(content);
+        this.$$parent.getContentElement().append(content);
       }
 
       // Update inheritable properties
@@ -1596,11 +1598,11 @@ qx.Class.define("qx.ui.core.Widget",
      * This function may be overridden to customize a class
      * content.
      *
-     * @return {qx.html.Element} The widget's content element
+     * @return {qxWeb} The widget's content element wrapped in a collection
      */
     _createContentElement : function()
     {
-      return new qx.html.Element("div", {
+      return qxWeb.create("<div>").setStyles({
         overflowX: "hidden",
         overflowY: "hidden"
       });

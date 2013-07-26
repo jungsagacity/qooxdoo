@@ -131,18 +131,14 @@ qx.Class.define("qx.ui.root.Application",
       hstyle.padding = hstyle.margin = bstyle.padding = bstyle.margin = "0px";
       hstyle.width = hstyle.height = bstyle.width = bstyle.height = "100%";
 
-      var elem = doc.createElement("div");
-      doc.body.appendChild(elem);
-
-      var root = new qx.html.Root(elem);
-      root.setStyles({
+      var root = qxWeb.create("<div>")
+      .setStyles({
         "position" : "absolute",
         "overflowX" : "hidden",
         "overflowY" : "hidden"
-      });
-
-      // Store "weak" reference to the widget in the DOM element.
-      root.setAttribute("$$widget", this.toHashCode());
+      })
+      .setAttribute("$$widget", this.toHashCode())
+      .appendTo(doc.body);
 
       return root;
     },
