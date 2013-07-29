@@ -37,6 +37,7 @@
  * @asset(qx/static/blank.gif)
  * @require(qx.module.Core)
  * @require(qx.module.Compat)
+ * @require(qx.module.event.Native)
  *
  * @ignore(qx.ui.root.Inline)
  */
@@ -1094,22 +1095,12 @@ qx.Class.define("qx.ui.core.Widget",
       this.getContentElement().add(elem);
 
       // Move
-      var domEl = elem.getDomElement();
-      // use the DOM element because the cache of the qx.html.Element could be
-      // wrong due to changes made by the decorators which work on the DOM element too
-      if (domEl) {
-        domEl.style.top = bounds.top + "px";
-        domEl.style.left = bounds.left + "px";
-        domEl.style.width = bounds.width + "px";
-        domEl.style.height = bounds.height + "px";
-      } else {
-        elem.setStyles({
-          left : bounds.left + "px",
-          top : bounds.top + "px",
-          width : bounds.width + "px",
-          height : bounds.height + "px"
-        });
-      }
+      elem.setStyles({
+        left : bounds.left + "px",
+        top : bounds.top + "px",
+        width : bounds.width + "px",
+        height : bounds.height + "px"
+      });
 
       // Remember element
       if (!this.__separators) {
