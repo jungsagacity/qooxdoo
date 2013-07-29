@@ -37,7 +37,6 @@
  * @asset(qx/static/blank.gif)
  * @require(qx.module.Core)
  * @require(qx.module.Compat)
- * @require(qx.module.event.Native)
  *
  * @ignore(qx.ui.root.Inline)
  */
@@ -3674,8 +3673,10 @@ qx.Class.define("qx.ui.core.Widget",
      */
     getContentLocation : function(mode)
     {
-      var domEl = this.getContentElement().getDomElement();
-      return domEl ? qx.bom.element.Location.get(domEl, mode) : null;
+      //var domEl = this.getContentElement().getDomElement();
+      //return domEl ? qx.bom.element.Location.get(domEl, mode) : null;
+      //TODO: mode
+      return this.getContentElement().getOffset();
     },
 
 

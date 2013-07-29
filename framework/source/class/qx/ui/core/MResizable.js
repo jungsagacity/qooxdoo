@@ -43,7 +43,7 @@ qx.Mixin.define("qx.ui.core.MResizable",
     content.addListener("losecapture", this.__onResizeLoseCapture, this);
 
     // Get a reference of the drag and drop handler
-    var domElement = content.getDomElement();
+    var domElement = content[0];
     if (domElement == null) {
       domElement = window;
     }
