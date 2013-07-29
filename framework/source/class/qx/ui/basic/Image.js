@@ -368,7 +368,8 @@ qx.Class.define("qx.ui.basic.Image",
         tagName = "img";
       }
 
-      var element = new qx.html.Image(tagName);
+      //var element = new qx.html.Image(tagName);
+      var element = qxWeb().createImage(tagName);
       element.setAttribute("$$widget", this.toHashCode());
       element.setScale(scale);
       element.setStyles({
@@ -378,7 +379,8 @@ qx.Class.define("qx.ui.basic.Image",
       });
 
       if (qx.core.Environment.get("css.alphaimageloaderneeded")) {
-        var wrapper = this.__wrapper = new qx.html.Element("div");
+        //var wrapper = this.__wrapper = new qx.html.Element("div");\
+        var wrapper = this.__wrapper = qxWeb().createImage("div");
         wrapper.setAttribute("$$widget", this.toHashCode());
         wrapper.setStyle("position", "absolute");
         wrapper.add(element);
@@ -685,8 +687,7 @@ qx.Class.define("qx.ui.basic.Image",
      * @param source {String} source path
      */
     __setSource : function(el, source) {
-      if (el.getNodeName() == "div") {
-
+      if (q.getNodeName (el[0]) == "div") {
         var dec = qx.theme.manager.Decoration.getInstance().resolve(this.getDecorator());
         // if the decorator defines any CSS background-image
         if (dec) {
