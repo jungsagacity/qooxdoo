@@ -160,7 +160,9 @@ qx.Class.define("qx.ui.embed.Html",
 
     // property apply
     _applyCssClass : function (value, old) {
-      this.getContentElement().removeClass(old);
+      if (old) {
+        this.getContentElement().removeClass(old);
+      }
       this.getContentElement().addClass(value);
     },
 
