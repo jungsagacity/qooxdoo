@@ -216,7 +216,7 @@ qx.Class.define("qx.ui.embed.Html",
       if (value) {
         this.getContentElement().setStyle("color", qx.theme.manager.Color.getInstance().resolve(value));
       } else {
-        this.getContentElement().removeStyle("color");
+        this.getContentElement().setStyle("color", "black");
       }
     }
   }
