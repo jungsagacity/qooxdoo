@@ -91,14 +91,8 @@ qx.Class.define("feedreader.view.desktop.Article",
       var html = feedreader.ArticleBuilder.createHtml(this.getArticle(), true);
       this.setHtml(html);
 
-      // flush all elements (needed to access the content of the dom element)
-      qx.html.Element.flush();
-
-      // get the dom element containing the html of the article
-      var element = this.getContentElement().getDomElement();
-
       // get all links
-      var links = element.getElementsByTagName("a");
+      var links = this.getContentElement().filter("a");
 
       // set the targets of all links to _blank
       for (var i = 0; i < links.length; i++) {
