@@ -309,8 +309,10 @@ qx.Bootstrap.define("qx.module.Compat", {
      * @attach{qxWeb}
      */
     setScale : function(value) {
-      this.__scale = value;
-      this.createImage();
+      if (value !== undefined && this.__source) {
+        this.__scale = value;
+        this.createImage();
+      }
       return this;
     },
 
@@ -325,8 +327,10 @@ qx.Bootstrap.define("qx.module.Compat", {
      * @attach{qxWeb}
      */
     setSource : function(value) {
-      this.__source = value;
-      this.createImage();
+      if (value !== undefined && value != this.__source) {
+        this.__source = value;
+        this.createImage();
+      }
       return this;
     },
 
