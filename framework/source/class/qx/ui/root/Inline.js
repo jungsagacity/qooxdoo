@@ -155,16 +155,17 @@ qx.Class.define("qx.ui.root.Inline",
     _createContentElement : function()
     {
       var el = this.__elem;
+      var rootEl;
 
       if (this.__dynX || this.__dynY)
       {
-        var rootEl = document.createElement("div");
+        rootEl = document.createElement("div");
         el.appendChild(rootEl);
       } else {
         rootEl = el;
       }
 
-      var root = new qx.html.Root(rootEl);
+      var root = qxWeb(rootEl);
 
       // Make relative
       rootEl.style.position = "relative";
