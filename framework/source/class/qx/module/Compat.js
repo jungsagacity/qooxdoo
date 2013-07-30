@@ -398,7 +398,7 @@ qx.Bootstrap.define("qx.module.Compat", {
         tagName = qx.bom.element.Decoration.getTagName(repeat);
       }
 
-      styles = {
+      var styles = {
         //TODO: get all current styles
       };
 
@@ -407,8 +407,9 @@ qx.Bootstrap.define("qx.module.Compat", {
         styles.backgroundRepeat = null;
       }
 
-      this.splice(0, 1);
-      this.push(document.createElement(tagName));
+      if (!this[0]) {
+        this.push(document.createElement(tagName));
+      }
 
       qx.bom.element.Decoration.update(this[0], source, repeat, styles);
 
