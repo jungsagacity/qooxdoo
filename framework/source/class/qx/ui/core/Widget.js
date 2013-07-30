@@ -3870,10 +3870,10 @@ qx.Class.define("qx.ui.core.Widget",
     this.__states = this.__childControls = null;
 
 
-    // Dispose layout manager and HTML elements
-    this._disposeObjects(
-      "__layoutManager",
-      "__contentElement"
-    );
+    // Dispose layout manager
+    this._disposeObjects("__layoutManager");
+
+    // Remove event listeners from content element
+    qx.event.Registration.removeAllListeners(this.__contentElement);
   }
 });
