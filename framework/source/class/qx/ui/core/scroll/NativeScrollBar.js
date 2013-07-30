@@ -158,7 +158,7 @@ qx.Class.define("qx.ui.core.scroll.NativeScrollBar",
     _getScrollPaneElement : function()
     {
       if (!this.__scrollPaneElement) {
-        this.__scrollPaneElement = new qx.html.Element();
+        this.__scrollPaneElement = qxWeb.create("<div>");
       }
       return this.__scrollPaneElement;
     },
