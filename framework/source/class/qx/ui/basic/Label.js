@@ -260,29 +260,6 @@ qx.Class.define("qx.ui.basic.Label",
 
 
     // overridden
-    _applySelectable : function(value)
-    {
-
-      // This is needed for all browsers not having text-overflow:ellipsis
-      // but supporting XUL (firefox < 4)
-      // https://bugzilla.mozilla.org/show_bug.cgi?id=312156
-      if (!qx.core.Environment.get("css.textoverflow") &&
-        qx.core.Environment.get("html.xul"))
-      {
-        if (value && !this.isRich())
-        {
-          if (qx.core.Environment.get("qx.debug")) {
-            this.warn("Only rich labels are selectable in browsers with Gecko engine!");
-          }
-          return;
-        }
-      }
-
-      this.base(arguments, value);
-    },
-
-
-    // overridden
     _getContentHeightForWidth : function(width)
     {
       if (!this.getRich() && !this.getWrap()) {
@@ -295,7 +272,7 @@ qx.Class.define("qx.ui.basic.Label",
     // overridden
     _createContentElement : function() {
       //return new qx.html.Label;
-      return qxWeb(qx.bom.Label.create());
+      return qx.module.ui.Label(qx.bom.Label.create());
     },
 
 
@@ -486,10 +463,7 @@ qx.Class.define("qx.ui.basic.Label",
       }
 
       if (this.isRich()) {
-        // apply the white space style to the label to force it not
-        // to wrap if wrap is set to false [BUG #3732]
-        var whiteSpace = value ? "normal" : "nowrap";
-        this.getContentElement().setStyle("whiteSpace", whiteSpace);
+        this.getContentElement().setWrap(value);
       }
     },
 
@@ -531,11 +505,7 @@ qx.Class.define("qx.ui.basic.Label",
     // property apply
     _applyValue : function(value, old)
     {
-      // Sync with content element
-      if (value === null) {
-        value = "";
-      }
-      this.getContentElement().setHtml(value);
+      this.getContentElement().setValue(value);
 
       // Mark text size cache as invalid
       this.__invalidContentSize = true;

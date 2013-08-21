@@ -131,7 +131,7 @@ qx.Class.define("qx.ui.root.Application",
       hstyle.padding = hstyle.margin = bstyle.padding = bstyle.margin = "0px";
       hstyle.width = hstyle.height = bstyle.width = bstyle.height = "100%";
 
-      var root = qxWeb.create("<div>")
+      var root = qx.module.ui.Widget.create("<div>")
       .setStyles({
         "position" : "absolute",
         "overflowX" : "hidden",

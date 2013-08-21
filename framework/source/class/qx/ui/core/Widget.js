@@ -1592,7 +1592,7 @@ qx.Class.define("qx.ui.core.Widget",
      */
     _createContentElement : function()
     {
-      return qxWeb.create("<div>").setStyles({
+      return qx.module.ui.Widget.create("<div>").setStyles({
         overflowX: "hidden",
         overflowY: "hidden"
       });
