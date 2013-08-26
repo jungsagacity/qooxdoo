@@ -55,7 +55,7 @@ qx.Bootstrap.define("qx.module.Template", {
     get : function(id, view, partials) {
       var el = qx.bom.Template.get(id, view, partials);
       el = qx.module.Template.__wrap(el);
-      return qxWeb.$init([el]);
+      return qxWeb.$init([el], qxWeb);
     },
 
     /**
@@ -89,7 +89,7 @@ qx.Bootstrap.define("qx.module.Template", {
     renderToNode : function(template, view, partials) {
       var el = qx.bom.Template.renderToNode(template, view, partials);
       el = qx.module.Template.__wrap(el);
-      return qxWeb.$init([el]);
+      return qxWeb.$init([el], qxWeb);
     },
 
 

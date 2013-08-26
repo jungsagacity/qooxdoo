@@ -69,7 +69,7 @@ qx.Bootstrap.define("qx.module.Traversing", {
         }
         children = children.concat(found);
       };
-      return qxWeb.$init(children);
+      return qxWeb.$init(children, this.constructor);
     },
 
 
@@ -109,7 +109,7 @@ qx.Bootstrap.define("qx.module.Traversing", {
         }
         parents = parents.concat(found);
       };
-      return qxWeb.$init(parents);
+      return qxWeb.$init(parents, this.constructor);
     },
 
 
@@ -172,7 +172,7 @@ qx.Bootstrap.define("qx.module.Traversing", {
           parent = qx.dom.Element.getParentElement(parent);
         }
       }
-      return qxWeb.$init(ancestors);
+      return qxWeb.$init(ancestors, this.constructor);
     },
 
 
@@ -205,7 +205,7 @@ qx.Bootstrap.define("qx.module.Traversing", {
         findClosest(qxWeb(this[i]));
       };
 
-      return qxWeb.$init(closest);
+      return qxWeb.$init(closest, this.constructor);
     },
 
 
@@ -223,7 +223,7 @@ qx.Bootstrap.define("qx.module.Traversing", {
       for (var i=0; i < this.length; i++) {
         found = found.concat(qx.bom.Selector.query(selector, this[i]));
       };
-      return qxWeb.$init(found);
+      return qxWeb.$init(found, this.constructor);
     },
 
 
@@ -239,7 +239,7 @@ qx.Bootstrap.define("qx.module.Traversing", {
       this._forEachElement(function(item) {
         found = found.concat(qx.lang.Array.fromCollection(item.childNodes));
       });
-      return qxWeb.$init(found);
+      return qxWeb.$init(found, this.constructor);
     },
 
 
@@ -311,7 +311,7 @@ qx.Bootstrap.define("qx.module.Traversing", {
         }
       });
 
-      return qxWeb.$init(found);
+      return qxWeb.$init(found, this.constructor);
     },
 
 
@@ -346,7 +346,7 @@ qx.Bootstrap.define("qx.module.Traversing", {
      */
     getNextAll : function(selector) {
       var ret = qx.module.Traversing.__hierarchyHelper(this, "getNextSiblings", selector);
-      return qxWeb.$init(ret);
+      return qxWeb.$init(ret, this.constructor);
     },
 
 
@@ -371,7 +371,7 @@ qx.Bootstrap.define("qx.module.Traversing", {
         }
       });
 
-      return qxWeb.$init(found);
+      return qxWeb.$init(found, this.constructor);
     },
 
 
@@ -406,7 +406,7 @@ qx.Bootstrap.define("qx.module.Traversing", {
      */
     getPrevAll : function(selector) {
       var ret = qx.module.Traversing.__hierarchyHelper(this, "getPreviousSiblings", selector);
-      return qxWeb.$init(ret);
+      return qxWeb.$init(ret, this.constructor);
     },
 
 
@@ -431,7 +431,7 @@ qx.Bootstrap.define("qx.module.Traversing", {
         }
       });
 
-      return qxWeb.$init(found);
+      return qxWeb.$init(found, this.constructor);
     },
 
 
@@ -447,7 +447,7 @@ qx.Bootstrap.define("qx.module.Traversing", {
      */
     getSiblings : function(selector) {
       var ret = qx.module.Traversing.__hierarchyHelper(this, "getSiblings", selector);
-      return qxWeb.$init(ret);
+      return qxWeb.$init(ret, this.constructor);
     },
 
 
