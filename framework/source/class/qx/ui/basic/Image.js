@@ -369,7 +369,7 @@ qx.Class.define("qx.ui.basic.Image",
       }
 
       //var element = new qx.html.Image(tagName);
-      var element = qxWeb().createImage(tagName);
+      var element = qx.module.ui.Image().createImage(tagName);
       element.setAttribute("$$widget", this.toHashCode());
       element.setScale(scale);
       element.setStyles({
@@ -380,7 +380,7 @@ qx.Class.define("qx.ui.basic.Image",
 
       if (qx.core.Environment.get("css.alphaimageloaderneeded")) {
         //var wrapper = this.__wrapper = new qx.html.Element("div");\
-        var wrapper = this.__wrapper = qxWeb().createImage("div");
+        var wrapper = this.__wrapper = qx.module.ui.Image().createImage("div");
         wrapper.setAttribute("$$widget", this.toHashCode());
         wrapper.setStyle("position", "absolute");
         wrapper.add(element);

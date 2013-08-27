@@ -41,6 +41,7 @@ qx.Bootstrap.define("qx.module.ui.Label", {
   defer : function() {
     qxWeb.$attach({
       label : function() {
+        this.setAttribute("qx-class", this.classname);
         return qx.lang.Array.cast(this, qx.module.ui.Label);
       }
     });
