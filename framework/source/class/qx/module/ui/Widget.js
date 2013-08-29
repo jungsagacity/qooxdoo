@@ -11,17 +11,15 @@ qx.Bootstrap.define("qx.module.ui.Widget", {
      * @return {qxWeb} Collection of elements
      */
     create : function(html) {
-      return qx.lang.Array.cast(qxWeb.create(html), qx.module.ui.Widget);
+      return new qx.module.ui.Widget(qxWeb.create(html));
     }
   },
 
 
   construct : function(selector, context) {
-    if (!selector && this instanceof qx.module.ui.Widget) {
-      return this;
-    }
-
-    return qx.lang.Array.cast(qxWeb(selector, context), qx.module.ui.Widget);
+    var col = this.base(arguments, selector, context);
+    Array.prototype.push.apply(this, Array.prototype.slice.call(col, 0, col.length));
+    this.setAttribute("qx-class", this.classname);
   },
 
 

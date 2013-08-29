@@ -1,12 +1,9 @@
 qx.Bootstrap.define("qx.module.ui.Label", {
   extend : qx.module.ui.Widget,
 
-  construct : function(selector, context) {
-    if (!selector && this instanceof qx.module.ui.Label) {
-      return this;
-    }
 
-    return qx.lang.Array.cast(qxWeb(selector, context), qx.module.ui.Label);
+  construct : function(selector, context) {
+     this.base(arguments, selector, context);
   },
 
 
@@ -41,8 +38,7 @@ qx.Bootstrap.define("qx.module.ui.Label", {
   defer : function() {
     qxWeb.$attach({
       label : function() {
-        this.setAttribute("qx-class", this.classname);
-        return qx.lang.Array.cast(this, qx.module.ui.Label);
+        return new qx.module.ui.Label(this);
       }
     });
   }

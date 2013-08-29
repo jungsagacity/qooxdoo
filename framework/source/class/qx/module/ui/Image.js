@@ -2,11 +2,7 @@ qx.Bootstrap.define("qx.module.ui.Image", {
   extend : qx.module.ui.Widget,
 
   construct : function(selector, context) {
-    if (!selector && this instanceof qx.module.ui.Image) {
-      return this;
-    }
-
-    return qx.lang.Array.cast(qxWeb(selector, context), qx.module.ui.Image);
+    this.base(arguments, selector, context);
   },
 
 
@@ -125,8 +121,7 @@ qx.Bootstrap.define("qx.module.ui.Image", {
   defer : function(statics) {
     qxWeb.$attach({
       image : function() {
-        buttons.setAttribute("qx-class", this.classname);
-        return qx.lang.Array.cast(this, qx.module.ui.Image);
+        return new qx.module.ui.Image(this);
       }
     });
   }

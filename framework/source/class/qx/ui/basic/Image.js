@@ -369,7 +369,7 @@ qx.Class.define("qx.ui.basic.Image",
       }
 
       //var element = new qx.html.Image(tagName);
-      var element = qx.module.ui.Image().createImage(tagName);
+      var element = (new qx.module.ui.Image()).createImage(tagName);
       element.setAttribute("$$widget", this.toHashCode());
       element.setScale(scale);
       element.setStyles({
