@@ -13,6 +13,16 @@ qx.Bootstrap.define("qx.module.ui.Button", {
 
 
   members : {
+    setEnabled : function(value) {
+      this.setProperty("disabled", !value);
+      if (value) {
+        this.removeClass("qx-button-disabled");
+      } else {
+        this.addClass("qx-button-disabled");
+      }
+    },
+
+
     setLabel : function(value) {
       this.getChildren("span").setHtml(value);
       return this;
