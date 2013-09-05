@@ -82,7 +82,7 @@ qx.Class.define("qx.ui.mobile.form.ToggleButton",
     }
 
     if(this.__fontSize) {
-      qx.bom.element.Style.set(this._getContentElement(),"fontSize",this.__fontSize+"px");
+      this._getContentElement().setStyle("fontSize", this.__fontSize + "px");
     }
 
     this.__switch = this._createSwitch();

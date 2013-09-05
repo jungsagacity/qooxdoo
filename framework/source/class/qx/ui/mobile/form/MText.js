@@ -116,7 +116,7 @@ qx.Mixin.define("qx.ui.mobile.form.MText",
 
       var targetElement = this.getContainerElement();
       if(targetElement) {
-        qx.bom.Element.focus(targetElement);
+        targetElement.focus();
       }
     },
 
@@ -127,7 +127,7 @@ qx.Mixin.define("qx.ui.mobile.form.MText",
     blur : function() {
       var targetElement = this.getContainerElement();
       if(targetElement) {
-        qx.bom.Element.blur(targetElement);
+        targetElement.blur();
       }
     }
   }

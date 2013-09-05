@@ -169,9 +169,9 @@ qx.Class.define("qx.ui.mobile.dialog.Popup",
         var rootHeight = qx.ui.mobile.dialog.Popup.ROOT.getHeight();
         var rootWidth = qx.ui.mobile.dialog.Popup.ROOT.getWidth();
 
-        var rootPosition = qx.bom.element.Location.get(qx.ui.mobile.dialog.Popup.ROOT.getContainerElement());
-        var anchorPosition = qx.bom.element.Location.get(this.__anchor.getContainerElement());
-        var popupDimension = qx.bom.element.Dimension.getSize(this.getContainerElement());
+        var rootPosition = qx.bom.element.Location.get(qx.ui.mobile.dialog.Popup.ROOT.getContainerElement()[0]);
+        var anchorPosition = qx.bom.element.Location.get(this.__anchor.getContainerElement()[0]);
+        var popupDimension = qx.bom.element.Dimension.getSize(this.getContainerElement()[0]);
 
         this.__lastPopupDimension = popupDimension;
 
@@ -312,8 +312,8 @@ qx.Class.define("qx.ui.mobile.dialog.Popup",
      */
     placeTo : function(left, top)
     {
-      qx.bom.element.Style.set(this.getContainerElement(),"left",left+"px");
-      qx.bom.element.Style.set(this.getContainerElement(),"top",top+"px");
+      this.getContainerElement().setStyle("left", left + "px");
+      this.getContainerElement().setStyle("top", top + "px");
     },
 
 
@@ -326,7 +326,7 @@ qx.Class.define("qx.ui.mobile.dialog.Popup",
       var clientX = evt.getAllTouches()[0].clientX;
       var clientY = evt.getAllTouches()[0].clientY;
 
-      var popupLocation = qx.bom.element.Location.get(this.getContainerElement());
+      var popupLocation = qx.bom.element.Location.get(this.getContainerElement()[0]);
 
       var isOutsideWidget =  clientX < popupLocation.left
         || clientX > popupLocation.left + this.__lastPopupDimension.width
@@ -361,13 +361,15 @@ qx.Class.define("qx.ui.mobile.dialog.Popup",
     {
       var container = this.getContainerElement();
 
-      container.style.position = "absolute";
-      var childDimension = qx.bom.element.Dimension.getSize(container);
+      container.setStyle("position", "absolute");
+      var childDimension = qx.bom.element.Dimension.getSize(container[0]);
 
-      container.style.left = "50%";
-      container.style.top = "50%";
-      container.style.marginLeft = -(childDimension.width/2) + "px";
-      container.style.marginTop = -(childDimension.height/2) + "px";
+      container.setStyles({
+        left : "50%",
+        top : "50%",
+        marginLeft : -(childDimension.width/2) + "px",
+        marginTop : -(childDimension.height/2) + "px"
+      });
     },
 
 
@@ -376,11 +378,12 @@ qx.Class.define("qx.ui.mobile.dialog.Popup",
      */
     _resetPosition : function()
     {
-      var container = this.getContainerElement();
-      container.style.left = "0px";
-      container.style.top = "0px";
-      container.style.marginLeft = null;
-      container.style.marginTop = null;
+      this.getContainerElement().setStyles({
+        left : "0px",
+        top : "0px",
+        marginLeft : null,
+        marginTop : null
+      });
     },
 
 

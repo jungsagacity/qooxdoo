@@ -123,8 +123,8 @@ qx.Class.define("mobileshowcase.page.Canvas",
      * Handles the touch start event on canvas.
      */
     _onTouchStart : function(evt) {
-      this.__canvasLeft = qx.bom.element.Location.getLeft(this.__canvas.getContentElement(), "padding");
-      this.__canvasTop = qx.bom.element.Location.getTop(this.__canvas.getContentElement(), "padding");
+      this.__canvasLeft = qx.bom.element.Location.getLeft(this.__canvas.getContentElement()[0], "padding");
+      this.__canvasTop = qx.bom.element.Location.getTop(this.__canvas.getContentElement()[0], "padding");
 
       this.__draw(evt.getAllTouches());
     },

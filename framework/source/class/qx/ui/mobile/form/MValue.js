@@ -41,8 +41,8 @@ qx.Mixin.define("qx.ui.mobile.form.MValue",
       this.setValue(value);
     }
 
-    qx.event.Registration.addListener(this.getContentElement(), "change", this._onChangeContent, this);
-    qx.event.Registration.addListener(this.getContentElement(), "input", this._onInput, this);
+    qx.event.Registration.addListener(this.getContentElement()[0], "change", this._onChangeContent, this);
+    qx.event.Registration.addListener(this.getContentElement()[0], "input", this._onInput, this);
   },
 
 

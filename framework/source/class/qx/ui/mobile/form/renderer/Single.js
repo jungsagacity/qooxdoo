@@ -254,10 +254,10 @@ qx.Class.define("qx.ui.mobile.form.renderer.Single",
 
     // override
     showErrorForItem : function(item) {
-      var errorNode = qx.dom.Element.create('div');
-      errorNode.innerHTML = item.getInvalidMessage();
-      qx.bom.element.Class.add(errorNode, 'form-element-error');
-      qx.dom.Element.insertAfter(errorNode, item.getLayoutParent().getContainerElement());
+      var errorNode = new qx.module.ui.Widget.create('<div>');
+      errorNode.setHtml(item.getInvalidMessage());
+      errorNode.addClass('form-element-error');
+      item.getLayoutParent().getContainerElement().insertAfter(errorNode);
       this.__errorMessageContainers.push(errorNode);
     },
 
@@ -283,7 +283,7 @@ qx.Class.define("qx.ui.mobile.form.renderer.Single",
     // override
     resetForm : function() {
       for(var i=0; i < this.__errorMessageContainers.length; i++) {
-        qx.dom.Element.remove(this.__errorMessageContainers[i]);
+        this.__errorMessageContainers[i].remove();
       }
     }
   },

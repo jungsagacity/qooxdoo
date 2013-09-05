@@ -229,7 +229,7 @@ qx.Class.define("qx.ui.mobile.dialog.Menu",
       var titleHeight = 0;
       var titleWidget = this.getTitleWidget();
       if(titleWidget != null) {
-         titleHeight = qx.bom.element.Dimension.getHeight(titleWidget.getContainerElement());
+         titleHeight = titleWidget.getContainerElement().getHeight();
       }
 
       // Menu max height has to be smaller than screen height.

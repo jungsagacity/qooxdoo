@@ -152,7 +152,8 @@ qx.Class.define("mobileshowcase.page.Event",
       this.getContent().add(containerGroup, {flex:1});
 
       // Center background gradient, when multiple touches are available.
-      qx.bom.element.Style.set(this.__container.getContentElement(),"background","-"+this.__vendorPrefix+"-radial-gradient(50% 50%, cover, #1a82f7, #2F2727)");
+      this.__container.getContentElement().setStyle(
+        "background", "-" + this.__vendorPrefix + "-radial-gradient(50% 50%, cover, #1a82f7, #2F2727)");
 
       // Start rendering
       qx.bom.AnimationFrame.request(this._render, this);
@@ -166,7 +167,7 @@ qx.Class.define("mobileshowcase.page.Event",
 
       var offset = 256;
 
-      var containerElement = this.__showcaseContainer.getContentElement();
+      var containerElement = this.__showcaseContainer.getContentElement()[0];
       var containerLeft = qx.bom.element.Location.getLeft(containerElement, "padding");
       var containerTop = qx.bom.element.Location.getTop(containerElement, "padding");
 
@@ -262,8 +263,8 @@ qx.Class.define("mobileshowcase.page.Event",
      * Reacts on touch events and updates the event container background and touch markers.
      */
     __updateTouchVisualisation : function(evt) {
-      var containerLeft = qx.bom.element.Location.getLeft(this.__container.getContentElement(), "padding");
-      var containerTop = qx.bom.element.Location.getTop(this.__container.getContentElement(), "padding");
+      var containerLeft = qx.bom.element.Location.getLeft(this.__container.getContentElement()[0], "padding");
+      var containerTop = qx.bom.element.Location.getTop(this.__container.getContentElement()[0], "padding");
 
       var touches = evt.getAllTouches();
 
@@ -326,7 +327,7 @@ qx.Class.define("mobileshowcase.page.Event",
       transitionValue = transitionValue + " scale(" + (this.__currentScale) + ")";
       transitionValue = transitionValue + " rotate(" + (this.__currentRotation) + "deg)";
 
-      qx.bom.element.Style.set(gestureTargetElement, "transform", transitionValue);
+      gestureTargetElement.setStyle("transform", transitionValue);
 
       // Touch Circle Visualization
       for (var i = 0; i < this.__touchCircleLeft.length; i++) {

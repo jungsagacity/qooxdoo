@@ -120,7 +120,7 @@ qx.Class.define("mobileshowcase.page.Drawer",
      * Toggles the z-Index position of the target drawer.
      */
     _togglePositionZ : function(target) {
-      qx.bom.element.Style.set(target.getContainerElement(),"transitionDuration","0s");
+      target.getContainerElement().setStyle("transitionDuration","0s");
 
       if(target.getPositionZ() == "above") {
         target.setPositionZ("below")
@@ -130,7 +130,7 @@ qx.Class.define("mobileshowcase.page.Drawer",
       }
 
       qx.event.Timer.once(function() {
-        qx.bom.element.Style.set(this,"transitionDuration", null);
+        this.setStyle("transitionDuration", null);
       },target.getContainerElement(),0);
     },
 

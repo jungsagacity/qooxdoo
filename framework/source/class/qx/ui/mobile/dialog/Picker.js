@@ -216,7 +216,7 @@ qx.Class.define("qx.ui.mobile.dialog.Picker",
       var slotElement = this.__slotElements[slotIndex];
       if(slotElement) {
         if(this._isSelectedIndexValid(slotElement, value)) {
-          this.__selectedIndex[slotElement.id] = value;
+          this.__selectedIndex[slotElement.getAttribute("id")] = value;
           this.__selectedIndexBySlot[slotIndex] = value;
 
           if(this.isShown()) {
@@ -335,17 +335,17 @@ qx.Class.define("qx.ui.mobile.dialog.Picker",
      * @param contentElement {Element} a picker slot content element.
      */
     _increaseSelectedIndex : function(contentElement) {
-      var oldSelectedIndex = this.__selectedIndex[contentElement.id];
+      var oldSelectedIndex = this.__selectedIndex[contentElement.getAttribute("id")];
       var newSelectedIndex = oldSelectedIndex +1;
 
-      var slotIndex = this._getSlotIndexByElement(contentElement);
+      var slotIndex = this._getSlotIndexByElement(contentElement[0]);
 
-      var model = this._getModelByElement(contentElement);
+      var model = this._getModelByElement(contentElement[0]);
       if(model.getLength() == newSelectedIndex) {
         newSelectedIndex = model.getLength() -1;
       }
 
-      this.__selectedIndex[contentElement.id] = newSelectedIndex;
+      this.__selectedIndex[contentElement.getAttribute("id")] = newSelectedIndex;
       this.__selectedIndexBySlot[slotIndex] = newSelectedIndex;
 
       this._updateSlot(contentElement);
@@ -357,7 +357,7 @@ qx.Class.define("qx.ui.mobile.dialog.Picker",
      * @param contentElement {Element} a picker slot content element.
      */
     _decreaseSelectedIndex : function(contentElement) {
-      var oldSelectedIndex = this.__selectedIndex[contentElement.id];
+      var oldSelectedIndex = this.__selectedIndex[contentElement.getAttribute("id")];
       var newSelectedIndex = oldSelectedIndex -1;
 
       var slotIndex = this._getSlotIndexByElement(contentElement);
@@ -366,7 +366,7 @@ qx.Class.define("qx.ui.mobile.dialog.Picker",
         newSelectedIndex = 0;
       }
 
-      this.__selectedIndex[contentElement.id] = newSelectedIndex;
+      this.__selectedIndex[contentElement.getAttribute("id")] = newSelectedIndex;
       this.__selectedIndexBySlot[slotIndex] = newSelectedIndex;
 
       this._updateSlot(contentElement);
@@ -379,7 +379,7 @@ qx.Class.define("qx.ui.mobile.dialog.Picker",
      *  @return {Integer} The slot index of the element
      */
     _getSlotIndexByElement : function(contentElement) {
-      var contentElementId = contentElement.id;
+      var contentElementId = contentElement.getAttribute("id");
       var slotIndex = this.__modelToSlotMap[contentElementId];
       return slotIndex;
     },
@@ -392,7 +392,7 @@ qx.Class.define("qx.ui.mobile.dialog.Picker",
      * @return {Boolean} whether the selectedIndex is valid.
      */
     _isSelectedIndexValid : function(contentElement, selectedIndex) {
-      var modelLength = this._getModelByElement(contentElement).getLength();
+      var modelLength = this._getModelByElement(contentElement[0]).getLength();
       return (selectedIndex < modelLength && selectedIndex >= 0);
     },
 
@@ -434,12 +434,12 @@ qx.Class.define("qx.ui.mobile.dialog.Picker",
      * @param target {Element} The target element.
      */
     _fixPickerSlotHeight : function(target) {
-      this.__labelHeight = target.children[0].offsetHeight;
+      this.__labelHeight = target.getChildren().getHeight();
 
-      var labelCount = target.children.length;
+      var labelCount = target.getChildren().length;
       var pickerSlotHeight = labelCount * this.__labelHeight;
 
-      qx.bom.element.Style.set(target, "height", pickerSlotHeight+"px");
+      target.setStyle("height", pickerSlotHeight+"px");
     },
 
 
@@ -449,13 +449,14 @@ qx.Class.define("qx.ui.mobile.dialog.Picker",
      */
     _onTouchStart : function(evt) {
       var target = evt.getCurrentTarget().getContainerElement();
+      var targetId = target.getAttribute("id");
       var touchX = evt.getScreenLeft();
       var touchY = evt.getScreenTop();
 
-      this.__targetIndex[target.id] = this.__selectedIndex[target.id];
+      this.__targetIndex[targetId] = this.__selectedIndex[targetId];
 
-      qx.bom.element.Style.set(target, "transitionDuration", "0s");
-      this.__slotTouchStartPoints[target.id] = {x:touchX, y:touchY};
+      target.setStyle("transitionDuration", "0s");
+      this.__slotTouchStartPoints[targetId] = {x:touchX, y:touchY};
 
       this._fixPickerSlotHeight(target);
 
@@ -469,10 +470,12 @@ qx.Class.define("qx.ui.mobile.dialog.Picker",
      */
     _onTouchEnd : function(evt) {
       var target = evt.getCurrentTarget().getContainerElement();
-      var model = this._getModelByElement(target);
-      var slotIndex = this._getSlotIndexByElement(target);
+      var targetId = target.getAttribute("id");
 
-      var touchStartPoint = this.__slotTouchStartPoints[target.id];
+      var model = this._getModelByElement(target[0]);
+      var slotIndex = this._getSlotIndexByElement(target[0]);
+
+      var touchStartPoint = this.__slotTouchStartPoints[targetId];
       if(!touchStartPoint) {
         return;
       }
@@ -484,8 +487,8 @@ qx.Class.define("qx.ui.mobile.dialog.Picker",
         // SWIPE
         //
         // Apply selectedIndex
-        this.__selectedIndex[target.id] = this.__targetIndex[target.id];
-        this.__selectedIndexBySlot[slotIndex] = this.__targetIndex[target.id];
+        this.__selectedIndex[targetId] = this.__targetIndex[targetId];
+        this.__selectedIndexBySlot[slotIndex] = this.__targetIndex[targetId];
       } else {
         // TAP
         //
@@ -493,7 +496,7 @@ qx.Class.define("qx.ui.mobile.dialog.Picker",
         // Depending on this detection, the value increases/decreases.
         var viewportTop = evt.getViewportTop();
 
-        var offsetParent = qx.bom.element.Location.getOffsetParent(target);
+        var offsetParent = qx.bom.element.Location.getOffsetParent(target[0]);
         var targetTop = qx.bom.element.Location.getTop(offsetParent, "margin");
         var relativeTop = viewportTop - targetTop;
         var decreaseIncreaseLimit = offsetParent.offsetHeight/2;
@@ -506,7 +509,7 @@ qx.Class.define("qx.ui.mobile.dialog.Picker",
       }
 
       // Fire changeSelection event including change data.
-      var selectedIndex = this.__selectedIndex[target.id];
+      var selectedIndex = this.__selectedIndex[targetId];
       var selectedValue = model.getItem(selectedIndex);
 
       this._updateSlot(target);
@@ -522,21 +525,22 @@ qx.Class.define("qx.ui.mobile.dialog.Picker",
     _onTouchMove : function(evt) {
       var target = evt.getCurrentTarget();
       var targetElement = evt.getCurrentTarget().getContainerElement();
+      var targetId = targetElement.getAttribute("id");
 
-      var touchStartPoint = this.__slotTouchStartPoints[targetElement.id];
+      var touchStartPoint = this.__slotTouchStartPoints[targetId];
       if(!touchStartPoint) {
         return;
       }
       var deltaY = evt.getScreenTop() - touchStartPoint.y;
 
-      var selectedIndex = this.__selectedIndex[targetElement.id];
-      var offsetTop = -selectedIndex*this.__labelHeight;
+      var selectedIndex = this.__selectedIndex[targetId];
+      var offsetTop = -selectedIndex * this.__labelHeight;
 
       var targetOffset = deltaY + offsetTop;
 
       // BOUNCING
-      var slotHeight = targetElement.offsetHeight;
-      var pickerHeight = parseInt(target.getLayoutParent().getContainerElement().offsetHeight);
+      var slotHeight = targetElement.getHeight();
+      var pickerHeight = parseInt(target.getLayoutParent().getContainerElement().getHeight());
       var upperBounce = this.__labelHeight;
       var lowerBounce = (- slotHeight + pickerHeight * 2);
       
@@ -552,9 +556,9 @@ qx.Class.define("qx.ui.mobile.dialog.Picker",
       var steps = Math.round(-deltaY/this.__labelHeight);
       var newIndex = selectedIndex+steps;
 
-      var modelLength = this._getModelByElement(targetElement).getLength();
+      var modelLength = this._getModelByElement(targetElement[0]).getLength();
       if(newIndex < modelLength && newIndex >= 0) {
-        this.__targetIndex[targetElement.id] = newIndex;
+        this.__targetIndex[targetId] = newIndex;
       }
 
       evt.preventDefault();
@@ -583,10 +587,10 @@ qx.Class.define("qx.ui.mobile.dialog.Picker",
         qx.bom.element.Style.set(targetElement,"transitionDuration", transitionDuration);
       }
 
-      var selectedIndex = this.__selectedIndex[targetElement.id];
+      var selectedIndex = this.__selectedIndex[targetElement.getAttribute("id")];
       var offsetTop = -selectedIndex * this.__labelHeight;
 
-      qx.bom.element.Style.set(targetElement,"transform","translate3d(0px,"+offsetTop+"px,0px)");
+      targetElement.setStyle("transform","translate3d(0px," + offsetTop + "px,0px)");
     },
 
 

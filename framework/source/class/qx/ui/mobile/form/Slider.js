@@ -189,7 +189,7 @@ qx.Class.define("qx.ui.mobile.form.Slider",
     _createContainerElement : function()
     {
       var container = this.base(arguments);
-      container.appendChild(this._createKnobElement());
+      container.append(this._createKnobElement());
       return container;
     },
 
@@ -201,7 +201,7 @@ qx.Class.define("qx.ui.mobile.form.Slider",
      */
     _createKnobElement : function()
     {
-      return qx.dom.Element.create("div");
+      return new qx.module.ui.Widget.create("<div>");
     },
 
 
@@ -214,10 +214,10 @@ qx.Class.define("qx.ui.mobile.form.Slider",
       this.addListener("touchmove", this._onTouchMove, this);
       this.addListener("appear", this._refresh, this);
 
-      qx.bom.Element.addListener(this._getKnobElement(), "touchstart", this._onTouchStart, this);
-      qx.bom.Element.addListener(this._getKnobElement(), "transitionEnd", this._onTransitionEnd, this);
-      qx.event.Registration.addListener(window, "resize", this._refresh, this);
-      qx.event.Registration.addListener(window, "orientationchange", this._refresh, this);
+      this._getKnobElement().on("touchstart", this._onTouchStart, this);
+      this._getKnobElement().on("transitionEnd", this._onTransitionEnd, this);
+      qxWeb(window).on("resize", this._refresh, this);
+      qxWeb(window).on("orientationchange", this._refresh, this);
       this.addListenerOnce("domupdated", this._refresh, this);
     },
 
@@ -231,10 +231,10 @@ qx.Class.define("qx.ui.mobile.form.Slider",
       this.removeListener("touchmove", this._onTouchMove, this);
       this.removeListener("appear", this._refresh, this);
 
-      qx.bom.Element.removeListener(this._getKnobElement(), "touchstart", this._onTouchStart, this);
-      qx.bom.Element.removeListener(this._getKnobElement(), "transitionEnd", this._onTransitionEnd, this);
-      qx.event.Registration.removeListener(window, "resize", this._refresh, this);
-      qx.event.Registration.removeListener(window, "orientationchange", this._refresh, this);
+      this._getKnobElement().off("touchstart", this._onTouchStart, this);
+      this._getKnobElement().off("transitionEnd", this._onTransitionEnd, this);
+      qxWeb(window).off("resize", this._refresh, this);
+      qxWeb(window).off("orientationchange", this._refresh, this);
       this.removeListener("domupdated", this._refresh, this);
     },
 
@@ -255,8 +255,8 @@ qx.Class.define("qx.ui.mobile.form.Slider",
     _updateSizes : function()
     {
       var containerElement = this.getContainerElement();
-      this._containerElementWidth = qx.bom.element.Dimension.getWidth(containerElement);
-      this._containerElementLeft = qx.bom.element.Location.getLeft(containerElement);
+      this._containerElementWidth = containerElement.getWidth();
+      this._containerElementLeft = containerElement.getOffset().left;
       this._pixelPerStep = this._getPixelPerStep(this._containerElementWidth);
     },
 
@@ -289,10 +289,10 @@ qx.Class.define("qx.ui.mobile.form.Slider",
     _onTransitionEnd : function(evt)
     {
       var knobElement = this._getKnobElement();
-      qx.bom.element.Style.set(knobElement, "transition", null);
+      knobElement.setStyle("transition", null);
 
       var element = this.getContainerElement();
-      qx.bom.element.Style.set(element, "transition", null);
+      element.setStyle("transition", null);
     },
 
 
@@ -337,7 +337,7 @@ qx.Class.define("qx.ui.mobile.form.Slider",
       if (!this._knobElement) {
         var element = this.getContainerElement();
         if (element) {
-          this._knobElement = element.childNodes[0];
+          this._knobElement = element.getChildren().getFirst();
         }
       }
       return this._knobElement;
@@ -375,10 +375,10 @@ qx.Class.define("qx.ui.mobile.form.Slider",
       var position = Math.floor(this._percentToPosition(width, percent));
       var element = this._getKnobElement();
 
-      qx.bom.element.Style.set(element, "width", width - (width - position) + "px");
+      element.setStyle("width", width - (width - position) + "px");
 
-      qx.bom.element.Attribute.set(element, "data-value", this.getValue());
-      qx.bom.element.Attribute.set(element, "data-percent", Math.floor(percent));
+      element.setAttribute("data-value", this.getValue());
+      element.setAttribute("data-percent", Math.floor(percent));
     },
 
 

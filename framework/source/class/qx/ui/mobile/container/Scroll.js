@@ -109,7 +109,7 @@ qx.Class.define("qx.ui.mobile.container.Scroll",
       var element = this.base(arguments);
       var scrollElement = this._createScrollElement();
       if (scrollElement) {
-        element.appendChild(scrollElement);
+        element.append(scrollElement);
       }
 
       return element;

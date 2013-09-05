@@ -74,8 +74,7 @@ qx.Class.define("qx.ui.mobile.embed.Canvas",
   members :
   {
     // overridden
-    _getTagName : function()
-    {
+    _getTagName : function() {
       return "canvas";
     },
 
@@ -86,7 +85,7 @@ qx.Class.define("qx.ui.mobile.embed.Canvas",
      * @return {Element} The canvas DOM element.
      */
     getCanvas : function() {
-      return this.getContainerElement();
+      return this.getContainerElement()[0];
     },
 
 
@@ -97,7 +96,7 @@ qx.Class.define("qx.ui.mobile.embed.Canvas",
      * @param width {Integer} canvas width
      */
     setWidth : function(width) {
-      this.getContainerElement().width = width;
+      this.getContainerElement()[0].width = width;
     },
 
 
@@ -107,7 +106,7 @@ qx.Class.define("qx.ui.mobile.embed.Canvas",
      * @return {Integer} canvas width
      */
     getWidth : function() {
-      return this.getContainerElement().width;
+      return this.getContainerElement()[0].width;
     },
 
 
@@ -118,7 +117,7 @@ qx.Class.define("qx.ui.mobile.embed.Canvas",
      * @param height {Integer} canvas height
      */
     setHeight : function(height) {
-      this.getContainerElement().height = height;
+      this.getContainerElement()[0].height = height;
     },
 
 
@@ -128,7 +127,7 @@ qx.Class.define("qx.ui.mobile.embed.Canvas",
      * @return {Integer} canvas height
      */
     getHeight : function() {
-      return this.getContainerElement().height;
+      return this.getContainerElement()[0].height;
     },
 
 
@@ -140,7 +139,7 @@ qx.Class.define("qx.ui.mobile.embed.Canvas",
      * @return {CanvasRenderingContext2D} The 2D rendering context.
      */
     getContext2d : function() {
-      return this.getContainerElement().getContext("2d");
+      return this.getContainerElement()[0].getContext("2d");
     }
   }
 });

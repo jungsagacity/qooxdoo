@@ -368,7 +368,7 @@ qx.Class.define("qx.ui.mobile.container.Carousel",
      */
     _setScrollersOpacity : function(opacity) {
       if (this.__carouselScroller) {
-        qx.bom.element.Style.set(this.__carouselScroller.getContainerElement(), "opacity", opacity);
+        this.__carouselScroller.getContainerElement().setStyle("opacity", opacity);
       }
     },
 
@@ -409,16 +409,16 @@ qx.Class.define("qx.ui.mobile.container.Carousel",
       if (!carouselContainerElement) {
         return;
       }
-      this.__carouselWidth = qx.bom.element.Dimension.getWidth(this.getContentElement());
+      this.__carouselWidth = this.getContentElement().getWidth();
 
-      qx.bom.element.Style.set(this.__carouselScroller.getContentElement(), "width", this.__pages.length * this.__carouselWidth + "px");
+      this.__carouselScroller.getContentElement().setStyle("width", this.__pages.length * this.__carouselWidth + "px");
 
       this.__pageWidth = this.__carouselWidth;
 
       for (var i = 0; i < this.__pages.length; i++) {
         var pageContentElement = this.__pages[i].getContentElement();
-        qx.bom.element.Style.set(pageContentElement, "width", this.__carouselWidth + "px");
-        qx.bom.element.Style.set(pageContentElement, "height", this.getHeight() + "px");
+        pageContentElement.setStyle("width", this.__carouselWidth + "px");
+        pageContentElement.setStyle("height", this.getHeight() + "px");
       }
 
       this._updatePagination(this.getCurrentIndex(), this.getCurrentIndex());
@@ -441,8 +441,8 @@ qx.Class.define("qx.ui.mobile.container.Carousel",
     * Handler for <code>domupdated</code> event on carousel.
     */
     _onDomUpdated : function() {
-      this.__carouselWidth = qx.bom.element.Dimension.getWidth(this.getContentElement());
-      this.__carouselScrollerWidth = qx.bom.element.Dimension.getWidth(this.__carouselScroller.getContentElement());
+      this.__carouselWidth = this.getContentElement().getWidth();
+      this.__carouselScrollerWidth = this.__carouselScroller.getContentElement().getWidth();
       this._refreshScrollerPosition();
     },
 
@@ -487,7 +487,7 @@ qx.Class.define("qx.ui.mobile.container.Carousel",
      * @return {Number} the horizontonal position
      */
     _getScrollerOffset : function() {
-      var transformMatrix = qx.bom.element.Style.get(this.__carouselScroller.getContentElement(), "transform");
+      var transformMatrix = this.__carouselScroller.getContentElement().getStyle("transform");
       var transformValueArray = transformMatrix.substr(7, transformMatrix.length - 8).split(', ');
       return parseInt(transformValueArray[4], 10);
     },
@@ -593,7 +593,7 @@ qx.Class.define("qx.ui.mobile.container.Carousel",
     * @param value {Number} the target value of the transitionDuration.
     */
     _setTransitionDuration : function(value) {
-      qx.bom.element.Style.set(this.__carouselScroller.getContentElement(), "transitionDuration", value+"s");
+      this.__carouselScroller.getContentElement().setStyle("transitionDuration", value+"s");
     },
 
 

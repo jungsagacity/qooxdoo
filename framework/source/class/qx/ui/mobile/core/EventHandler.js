@@ -146,17 +146,17 @@ qx.Class.define("qx.ui.mobile.core.EventHandler",
       EventHandler.__cancelActiveStateTimer();
 
       var target = domEvent.getTarget();
-      while (target && target.parentNode && target.parentNode.nodeType == 1 && qx.bom.element.Attribute.get(target, "data-activatable") != "true") {
+      while (target && target.parentNode && target.parentNode.nodeType == 1 && target.getAttribute("data-activatable") != "true") {
         target = target.parentNode;
       }
 
-      EventHandler.__activeTarget = target;
+      EventHandler.__activeTarget = qxWeb(target);
       EventHandler.___timer = window.setTimeout(function()
       {
         EventHandler.___timer =  null;
         var target = EventHandler.__activeTarget;
-        if (target && (qx.bom.element.Attribute.get(target, "data-selectable") != "false")) {
-          qx.bom.element.Class.add(target, "active");
+        if (target && (target.getAttribute("data-selectable") != "false")) {
+          target.addClass("active");
         }
       },100);
     },
@@ -223,7 +223,7 @@ qx.Class.define("qx.ui.mobile.core.EventHandler",
       EventHandler.__cancelActiveStateTimer();
       var activeTarget = EventHandler.__activeTarget;
       if (activeTarget) {
-        qx.bom.element.Class.remove(activeTarget, "active");
+        activeTarget.removeClass("active");
       }
       EventHandler.__activeTarget = null;
     }
@@ -252,7 +252,7 @@ qx.Class.define("qx.ui.mobile.core.EventHandler",
     // interface implementation
     registerEvent : function(target, type, capture)
     {
-      var element = target.getContainerElement();
+      var element = target.getContainerElement()[0];
       qx.event.Registration.addListener(element, type, this._dispatchEvent, this, capture);
     },
 

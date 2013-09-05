@@ -65,8 +65,8 @@ qx.Mixin.define("qx.ui.mobile.container.MIScroll",
      */
     _createScrollElement : function()
     {
-      var scroll = qx.dom.Element.create("div");
-      qx.bom.element.Class.add(scroll,"iscroll");
+      var scroll = qx.module.ui.Widget.create("<div>");
+      scroll.addClass("iscroll");
       return scroll;
     },
 
@@ -78,7 +78,7 @@ qx.Mixin.define("qx.ui.mobile.container.MIScroll",
      */
     _getScrollContentElement : function()
     {
-      return this.getContainerElement().childNodes[0];
+      return this.getContainerElement().getChildren().getFirst();
     },
 
 
@@ -164,7 +164,7 @@ qx.Mixin.define("qx.ui.mobile.container.MIScroll",
 
       var iScrollProperties = qx.lang.Object.mergeWith(defaultScrollProperties, customScrollProperties, true);
 
-      return new iScroll(this.getContainerElement(), iScrollProperties);
+      return new iScroll(this.getContainerElement()[0], iScrollProperties);
     },
 
 

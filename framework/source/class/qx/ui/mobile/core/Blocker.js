@@ -122,16 +122,20 @@ qx.Class.define("qx.ui.mobile.core.Blocker",
     {
       if(qx.ui.mobile.core.Blocker.ROOT == this.getLayoutParent())
       {
-        this.getContainerElement().style.top = qx.bom.Viewport.getScrollTop() + "px";
-        this.getContainerElement().style.left = qx.bom.Viewport.getScrollLeft() + "px";
-        this.getContainerElement().style.width = qx.bom.Viewport.getWidth() + "px";
-        this.getContainerElement().style.height = qx.bom.Viewport.getHeight()  + "px";
+        this.getContainerElement().setStyles({
+          top : qx.bom.Viewport.getScrollTop() + "px",
+          left : qx.bom.Viewport.getScrollLeft() + "px",
+          width : qx.bom.Viewport.getWidth() + "px",
+          height : qx.bom.Viewport.getHeight()  + "px"
+        });
       }
       else if(this.getLayoutParent() != null)
       {
-        var dimension = qx.bom.element.Dimension.getSize(this.getLayoutParent().getContainerElement());
-        this.getContainerElement().style.width = dimension.width + "px";
-        this.getContainerElement().style.height = dimension.height  + "px";
+        var dimension = qx.bom.element.Dimension.getSize(this.getLayoutParent().getContainerElement()[0]);
+        this.getContainerElement().setStyles({
+          width : dimension.width + "px",
+          height : dimension.height  + "px"
+        });
       }
     },
 

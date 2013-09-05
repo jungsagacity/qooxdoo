@@ -417,7 +417,7 @@ qx.Class.define("qx.ui.mobile.container.ScrollComposite",
 
     // Property apply
     _applyHeight : function(value, old) {
-      qx.bom.element.Style.set(this._scrollContainer.getContainerElement(), "max-height", value);
+      this._scrollContainer.getContainerElement().setStyle("max-height", value);
     },
 
 
@@ -468,7 +468,7 @@ qx.Class.define("qx.ui.mobile.container.ScrollComposite",
         var transformCssName = qx.bom.Style.getCssName(transformPropertyName);
         easing = transformCssName+" "+easing;
       }
-      qx.bom.element.Style.set(this._scrollContainer.getContainerElement(),"transition", easing);
+      this._scrollContainer.getContainerElement().setStyle("transition", easing);
     },
 
 
@@ -512,8 +512,8 @@ qx.Class.define("qx.ui.mobile.container.ScrollComposite",
      * @param evt {qx.event.type.Data} a custom event.
      */
     _fixChildElementsHeight : function(evt) {
-      this.getContainerElement().style.height = 'auto';
-      this.getContainerElement().style.height = this.getContainerElement().scrollHeight+'px';
+      this.getContainerElement().setStyle("height", "auto");
+      this.getContainerElement().setStyle("height", this.getContainerElement()[0].scrollHeight + "px");
     }
   },
 

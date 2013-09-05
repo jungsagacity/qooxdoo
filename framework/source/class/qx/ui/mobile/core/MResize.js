@@ -65,8 +65,8 @@ qx.Mixin.define("qx.ui.mobile.core.MResize",
 
       if (parent && parent.getContainerElement()) {
           var element = this.getContainerElement();
-          qx.bom.element.Style.set(element, "height", "auto");
-          qx.bom.element.Style.set(element, "width", "auto");
+          element.setStyle("height", "");
+          element.setStyle("width", "");
       }
     },
 
@@ -111,9 +111,9 @@ qx.Mixin.define("qx.ui.mobile.core.MResize",
       var element = this.getContainerElement();
       if (qx.core.Environment.get("qx.mobile.nativescroll"))
       {
-        qx.bom.element.Style.set(element, "minHeight", height + "px");
+        element.setStyle("minHeight", height + "px");
       } else {
-        qx.bom.element.Style.set(element, "height", height + "px");
+        element.setStyle("height", height + "px");
       }
     },
 
@@ -129,9 +129,9 @@ qx.Mixin.define("qx.ui.mobile.core.MResize",
       var element = this.getContainerElement();
       if (qx.core.Environment.get("qx.mobile.nativescroll"))
       {
-        qx.bom.element.Style.set(element, "minWidth", width + "px");
+        element.setStyle("minWidth", width + "px");
       } else {
-        qx.bom.element.Style.set(element, "width", width + "px");
+        element.setStyle("width", width + "px");
       }
     }
   }

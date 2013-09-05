@@ -654,8 +654,7 @@ qx.Class.define("qx.ui.mobile.core.Widget",
      * Override this method if you want to create a custom widget.
      * @return {String} The container element's tag name
      */
-    _getTagName : function()
-    {
+    _getTagName : function() {
       return "div";
     },
 
@@ -666,9 +665,8 @@ qx.Class.define("qx.ui.mobile.core.Widget",
     *
     * @return {Element} the container element.
     */
-    _createContainerElement : function()
-    {
-      return qx.dom.Element.create(this._getTagName());
+    _createContainerElement : function() {
+      return qx.module.ui.Widget.create("<" + this._getTagName() + ">");
     },
 
 
@@ -676,8 +674,7 @@ qx.Class.define("qx.ui.mobile.core.Widget",
      * Triggers the {@link #scheduleDomUpdated} method. This method needs to be called
      * when the DOM has changed, e.g. an element was added / removed / styled.
      */
-    _domUpdated : function()
-    {
+    _domUpdated : function() {
       qx.ui.mobile.core.Widget.scheduleDomUpdated();
     },
 
@@ -717,7 +714,7 @@ qx.Class.define("qx.ui.mobile.core.Widget",
       }
       // Change the id of the DOM element
       var element = this.getContainerElement();
-      element.id = value;
+      element.setAttribute("id", value);
       // Register the widget
       qx.ui.mobile.core.Widget.registerWidget(this);
 
@@ -768,7 +765,7 @@ qx.Class.define("qx.ui.mobile.core.Widget",
 
       this._initializeChildLayout(child, layoutProperties);
 
-      this.getContentElement().appendChild(child.getContainerElement());
+      this.getContentElement().append(child.getContainerElement());
       this.__children.push(child);
 
       this._domUpdated();
@@ -823,7 +820,7 @@ qx.Class.define("qx.ui.mobile.core.Widget",
 
       this._initializeChildLayout(child, layoutProperties);
 
-      this.getContentElement().insertBefore(child.getContainerElement(), beforeWidget.getContainerElement());
+      child.getContainerElement().insertBefore(beforeWidget.getContainerElement());
       qx.lang.Array.insertBefore(this.__children, child, beforeWidget);
 
       this._domUpdated();
@@ -858,7 +855,7 @@ qx.Class.define("qx.ui.mobile.core.Widget",
       var index = this._indexOf(afterWidget);
 
       if (index == length - 1) {
-        this.getContentElement().appendChild(child.getContainerElement());
+        this.getContentElement().append(child.getContainerElement());
       }
       else
       {
@@ -967,7 +964,7 @@ qx.Class.define("qx.ui.mobile.core.Widget",
     removeChild : function(child)
     {
       qx.lang.Array.remove(this.__children, child);
-      this.getContentElement().removeChild(child.getContainerElement());
+      child.getContainerElement().remove();
       var layout = this._getLayout();
       if (layout) {
         layout.disconnectFromChildWidget(child);
@@ -1138,7 +1135,7 @@ qx.Class.define("qx.ui.mobile.core.Widget",
     */
     _setHtml : function(value)
     {
-      this.getContentElement().innerHTML = value || "";
+      this.getContentElement().setHtml(value || "");
       this._domUpdated();
     },
 
@@ -1165,7 +1162,7 @@ qx.Class.define("qx.ui.mobile.core.Widget",
         }
       }
 
-      qx.bom.element.Style.set(this.getContainerElement(),"transform", propertyValue);
+      this.getContainerElement().setStyle("transform", propertyValue);
     },
 
 
@@ -1211,11 +1208,9 @@ qx.Class.define("qx.ui.mobile.core.Widget",
 
       var element = this.getContainerElement();
       if (value != null) {
-        qx.bom.element.Attribute.set(element, attribute, value);
-      }
-      else
-      {
-        qx.bom.element.Attribute.reset(element, attribute);
+        element.setAttribute(attribute, value);
+      } else {
+        element.removeAttribute(attribute);
       }
       this._domUpdated();
     },
@@ -1230,7 +1225,7 @@ qx.Class.define("qx.ui.mobile.core.Widget",
     _getAttribute : function(attribute)
     {
       var element = this.getContainerElement();
-      return qx.bom.element.Attribute.get(element, attribute);
+      return element.getAttribute(attribute);
     },
 
 
@@ -1272,11 +1267,11 @@ qx.Class.define("qx.ui.mobile.core.Widget",
 
       var element = this.getContainerElement();
       if (value != null) {
-        qx.bom.element.Style.set(element, style, value);
+        element.setStyle(style, value);
       }
       else
       {
-        qx.bom.element.Style.reset(element, style);
+        element.setStyle(style, "");
       }
       this._domUpdated();
     },
@@ -1291,7 +1286,7 @@ qx.Class.define("qx.ui.mobile.core.Widget",
     _getStyle : function(style)
     {
       var element = this.getContainerElement();
-      return qx.bom.element.Style.get(element, style);
+      return element.getStyle(style);
     },
 
     /*
@@ -1319,7 +1314,7 @@ qx.Class.define("qx.ui.mobile.core.Widget",
      * @param cssClass {String} The CSS class to add
      */
     addCssClass : function(cssClass) {
-      qx.bom.element.Class.add(this.getContainerElement(), cssClass);
+      this.getContainerElement().addClass(cssClass);
       this._domUpdated();
     },
 
@@ -1332,7 +1327,7 @@ qx.Class.define("qx.ui.mobile.core.Widget",
      */
     addCssClasses : function(cssClasses) {
       if(cssClasses){
-        qx.bom.element.Class.addClasses(this.getContainerElement(), cssClasses);
+        this.getContainerElement().addClasses(cssClasses);
         this._domUpdated();
       }
     },
@@ -1344,7 +1339,7 @@ qx.Class.define("qx.ui.mobile.core.Widget",
      * @param cssClass {String} The CSS class to remove
      */
     removeCssClass : function(cssClass) {
-      qx.bom.element.Class.remove(this.getContainerElement(), cssClass);
+      this.getContainerElement().removeClass(cssClass);
       this._domUpdated();
     },
 
@@ -1356,7 +1351,7 @@ qx.Class.define("qx.ui.mobile.core.Widget",
      */
     removeCssClasses : function(cssClasses) {
        if(cssClasses){
-         qx.bom.element.Class.removeClasses(this.getContainerElement(), cssClasses);
+         this.getContainerElement().removeClasses(cssClasses);
          this._domUpdated();
        }
     },
@@ -1383,7 +1378,7 @@ qx.Class.define("qx.ui.mobile.core.Widget",
      * @return {Boolean} Whether the CSS class is set or not
      */
     hasCssClass : function(cssClass) {
-      return qx.bom.element.Class.has(this.getContainerElement(), cssClass);
+      return this.getContainerElement().hasClass(cssClass);
     },
 
 
@@ -1506,7 +1501,7 @@ qx.Class.define("qx.ui.mobile.core.Widget",
      */
     isSeeable : function()
     {
-      return this.getContainerElement().offsetWidth > 0;
+      return this.getContainerElement().getWidth() > 0;
     },
 
 

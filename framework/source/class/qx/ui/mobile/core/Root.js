@@ -38,7 +38,7 @@ qx.Class.define("qx.ui.mobile.core.Root",
    */
   construct : function(root, layout)
   {
-    this.__root = root || document.body;
+    this.__root = new qx.module.ui.Widget(root || document.body);
     this.base(arguments, layout || new qx.ui.mobile.layout.VBox());
 
     this.addCssClass("mobile");
@@ -108,7 +108,7 @@ qx.Class.define("qx.ui.mobile.core.Root",
     * @return {Integer} the width of the container element.
     */
     getWidth : function() {
-      return qx.bom.element.Dimension.getWidth(this.__root);
+      return this.__root.getWidth();
     },
 
 
@@ -117,7 +117,7 @@ qx.Class.define("qx.ui.mobile.core.Root",
     * @return {Integer} the height of the container element.
     */
     getHeight : function() {
-      return qx.bom.element.Dimension.getHeight(this.__root);
+      return this.__root.getHeight();
     },
 
 

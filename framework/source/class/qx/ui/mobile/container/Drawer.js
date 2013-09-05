@@ -234,11 +234,11 @@ qx.Class.define("qx.ui.mobile.container.Drawer",
     _applySize : function(value, old) {
       var isVertical = this.getOrientation() =="left" || this.getOrientation() == "right";
       if(isVertical) {
-        qx.bom.element.Style.set(this.getContainerElement(),"height", null);
-        qx.bom.element.Style.set(this.getContainerElement(),"width", this.getWidth()+"px");
+        this.getContainerElement().setStyle("height", null);
+        this.getContainerElement().setStyle("width", this.getWidth()+"px");
       } else {
-        qx.bom.element.Style.set(this.getContainerElement(),"width", null);
-        qx.bom.element.Style.set(this.getContainerElement(),"height", this.getHeight()+"px");
+        this.getContainerElement().setStyle("width", null);
+        this.getContainerElement().setStyle("height", this.getHeight()+"px");
       }
     },
 
@@ -378,7 +378,7 @@ qx.Class.define("qx.ui.mobile.container.Drawer",
         target = this.getContentElement();
       }
 
-      qx.bom.element.Style.set(target, "transition", "all "+this.getTransitionDuration()+"ms ease-in-out");
+      target.setStyle("transition", "all "+this.getTransitionDuration()+"ms ease-in-out");
     },
 
 
@@ -392,8 +392,8 @@ qx.Class.define("qx.ui.mobile.container.Drawer",
 
       this.__inAnimation = false;
 
-      qx.bom.element.Style.set(this.getContentElement(),"transition", null);
-      qx.bom.element.Style.set(this.__parent.getContentElement(),"transition", null);
+      this.getContentElement().setStyle("transition", null);
+      this.__parent.getContentElement().setStyle("transition", null);
     },
 
 
@@ -424,7 +424,7 @@ qx.Class.define("qx.ui.mobile.container.Drawer",
 
       var isShown = !this.hasCssClass("hidden");
       if(isShown && this.isHideOnParentTouch()) {
-        var location = qx.bom.element.Location.get(this.getContainerElement());
+        var location = qx.bom.element.Location.get(this.getContainerElement()[0]);
 
         if (this.getOrientation() =="left" && this.__touchStartPosition[0] > location.right
         || this.getOrientation() =="top" && this.__touchStartPosition[1] > location.bottom
@@ -448,7 +448,7 @@ qx.Class.define("qx.ui.mobile.container.Drawer",
       var direction = evt.getDirection();
       var isHidden = this.hasCssClass("hidden");
       if(isHidden) {
-        var location = qx.bom.element.Location.get(this.getContainerElement());
+        var location = qx.bom.element.Location.get(this.getContainerElement()[0]);
 
         if (
           (direction == "right"

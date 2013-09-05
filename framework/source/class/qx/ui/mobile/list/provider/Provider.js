@@ -97,7 +97,7 @@ qx.Class.define("qx.ui.mobile.list.provider.Provider",
       this.__itemRenderer.reset();
       this._configureItem(data, row);
       // Clone the element and all it's events
-      return qx.bom.Element.clone(this.__itemRenderer.getContainerElement(), true);
+      return this.__itemRenderer.getContainerElement().clone(true);
     },
 
 

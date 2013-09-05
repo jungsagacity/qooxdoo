@@ -279,12 +279,12 @@ qx.Class.define("qx.ui.mobile.layout.Card",
       var onAnimationEnd = qx.lang.Function.bind(this._onAnimationEnd, this);
 
       if(qx.core.Environment.get("event.mspointer")) {
-        qx.bom.Event.addNativeListener(fromElement, "MSAnimationEnd", onAnimationEnd, false);
-        qx.bom.Event.addNativeListener(toElement, "MSAnimationEnd", onAnimationEnd, false);
+        fromElement.on("MSAnimationEnd", onAnimationEnd, false);
+        toElement.on("MSAnimationEnd", onAnimationEnd, false);
       }
 
-      qx.event.Registration.addListener(fromElement, "animationEnd", this._onAnimationEnd, this);
-      qx.event.Registration.addListener(toElement, "animationEnd", this._onAnimationEnd, this);
+      fromElement.on("animationEnd", this._onAnimationEnd, this);
+      toElement.on("animationEnd", this._onAnimationEnd, this);
 
       var fromCssClasses = this.__getAnimationClasses("out");
       var toCssClasses = this.__getAnimationClasses("in");
@@ -294,11 +294,11 @@ qx.Class.define("qx.ui.mobile.layout.Card",
       var toElementAnimation = this.__cardAnimation.getAnimation(this.__animation, "in", this.__reverse);
       var fromElementAnimation = this.__cardAnimation.getAnimation(this.__animation, "out", this.__reverse);
 
-      qx.bom.element.Class.addClasses(toElement, toCssClasses);
-      qx.bom.element.Class.addClasses(fromElement, fromCssClasses);
+      toElement.addClasses(toCssClasses);
+      fromElement.addClasses(fromCssClasses);
 
-      qx.bom.element.Animation.animate(toElement, toElementAnimation);
-      qx.bom.element.Animation.animate(fromElement, fromElementAnimation);
+      toElement.animate(toElementAnimation);
+      fromElement.animate(fromElementAnimation);
     },
 
 
@@ -324,11 +324,11 @@ qx.Class.define("qx.ui.mobile.layout.Card",
         var fromElement = this.__currentWidget.getContainerElement();
         var toElement = this.__nextWidget.getContainerElement();
 
-        qx.event.Registration.removeListener(fromElement, "animationEnd", this._onAnimationEnd, this);
-        qx.event.Registration.removeListener(toElement, "animationEnd", this._onAnimationEnd, this);
+        fromElement.off("animationEnd", this._onAnimationEnd, this);
+        toElement.off("animationEnd", this._onAnimationEnd, this);
 
-        qx.bom.element.Class.removeClasses(fromElement, this.__getAnimationClasses("out"));
-        qx.bom.element.Class.removeClasses(toElement, this.__getAnimationClasses("in"));
+        fromElement.removeClasses(this.__getAnimationClasses("out"));
+        toElement.removeClasses(this.__getAnimationClasses("in"));
 
         // Release fixed widget size, for further layout adaption.
         this._releaseWidgetSize(this.__currentWidget);

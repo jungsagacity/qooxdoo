@@ -112,7 +112,7 @@ qx.Class.define("qx.ui.mobile.dialog.BusyIndicator",
      * Listener for appear event.
      */
     _onAppear : function() {
-      this.__animationHandle = qx.bom.element.Animation.animate(this.getIconWidget().getContainerElement(), this.__spinnerAnimation);
+      this.__animationHandle = qx.bom.element.Animation.animate(this.getIconWidget().getContainerElement()[0], this.__spinnerAnimation);
     },
 
 

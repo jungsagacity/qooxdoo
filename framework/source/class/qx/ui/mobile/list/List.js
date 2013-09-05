@@ -175,7 +175,7 @@ qx.Class.define("qx.ui.mobile.list.List",
      */
     _onTap : function(evt)
     {
-      var element = evt.getOriginalTarget();
+      var element = qxWeb(evt.getOriginalTarget());
       var index = -1;
 
       // Click on border: do nothing.
@@ -183,13 +183,13 @@ qx.Class.define("qx.ui.mobile.list.List",
         return;
       }
 
-      while (element.tagName != "LI") {
-        element = element.parentNode;
+      while (element.getProperty("tagName") != "LI") {
+        element = element.getParents();
       }
-      if (qx.bom.element.Attribute.get(element, "data-selectable") != "false"
-          && qx.dom.Element.hasChild(this.getContainerElement(), element))
+      if (element.getAttribute("data-selectable") != "false"
+          && this.getContainerElement().getChildren().indexOf(element[0]) != -1)
       {
-        index = qx.dom.Hierarchy.getElementIndex(element);
+        index = element.getParents().getChildren().indexOf(element[0]);
       }
       if (index != -1) {
         this.fireDataEvent("changeSelection", index);
@@ -373,7 +373,7 @@ qx.Class.define("qx.ui.mobile.list.List",
       var element = this.getContentElement();
       for (var index = 0; index < itemCount; index++) {
         var itemElement = this.__provider.getItemElement(model.getItem(index), index);
-        element.appendChild(itemElement);
+        element.append(itemElement);
       }
       this._domUpdated();
     }
