@@ -1,0 +1,41 @@
+#slider {
+  width: 70%;
+  line-height: 0.5;
+
+  margin-left: 50px;
+
+  border-top: 1px solid rgb(104, 104, 104);
+  border-right: 1px solid rgb(183, 183, 183);
+  border-bottom: 1px solid rgb(183, 183, 183);
+  border-left: 1px solid rgb(183, 183, 183);
+}
+
+#knob {
+  display: inline-block;
+
+  margin: -20px 0px;
+  padding: 5px 10px;
+
+  -webkit-user-select: none;
+
+  font-weight: bold;
+  text-align: center;
+
+  border: 1px solid rgb(187, 187, 187);
+  background-color: rgb(241, 241, 241);
+  border-radius: 3px;
+}
+
+
+#knob:before {
+  z-index: -1;
+  content: ".";
+  color: rgb(187, 187, 187);
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(-45deg, rgb(187, 187, 187) 50%, rgb(241, 241, 241) 50%);
+  -webkit-transform: rotate(45deg);
+  top: 11px;
+  left: 9px;
+}

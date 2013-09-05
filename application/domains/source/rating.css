@@ -1,0 +1,24 @@
+.qx-rating {
+  font-size: 30px;
+  background: linear-gradient(200deg, #E3B64A, #D5771D);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px #BB6718;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.qx-rating.qx-rating-off {
+  background: linear-gradient(200deg, #eee, #cfcfcf);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px #cfcfcf;
+}
+
+.qx-rating-heart {
+  font-size: 50px;
+  background: linear-gradient(200deg, #F264A7, #C35287);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px #C35287;
+}

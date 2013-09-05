@@ -1,0 +1,7 @@
+.qx-toolbar {
+  overflow: hidden;
+  background-color: rgb(244, 244, 244);
+  padding: 7px;
+  width: 100%;
+  margin-top: 20px;
+}

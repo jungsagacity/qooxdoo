@@ -1,0 +1,22 @@
+.qx-menu {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  z-index: 1000001;
+  position: absolute;
+  background-color: white;
+  border: 1px solid rgb(221, 221, 221);
+  padding: 0px;
+  margin: 0px;
+}
+
+
+.qx-menu li {
+  padding: 6px 10px;
+  list-style-type: none;
+  cursor: pointer;
+}
+
+.qx-menu li:hover {
+  color: white;
+  background-color: rgb(34, 68, 187);
+}

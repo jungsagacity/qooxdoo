@@ -1,0 +1,72 @@
+body {
+  color: rgb(38, 38, 38);
+  font-family: 'Lucida Grande', 'DejaVu Sans', Verdana, sans-serif;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.qx-widget {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  outline: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+}
+
+
+
+
+
+
+.qx-button-disabled {
+  border: 1px solid rgb(187, 187, 187) !important;
+  background-image: linear-gradient(rgb(249, 249, 249) 40%, rgb(227, 227, 227) 70%) !important;
+  opacity: 0.8;
+}
+
+.qx-button-disabled img {
+  opacity: 0.4;
+}
+
+.qx-button {
+  display: inline-block;
+  padding: 5px 6px;
+  margin: 3px;
+
+  border: 1px solid rgb(187, 187, 187);
+  background-color: rgb(249, 249, 249);
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border-radius: 3px;
+  background-image: linear-gradient(rgb(249, 249, 249) 40%, rgb(227, 227, 227) 70%);
+
+  cursor: pointer;
+  font-size: 12px;
+  outline: none;
+}
+
+
+.qx-button:hover {
+  border: 1px solid rgb(147, 147, 147);
+}
+
+.qx-button:active {
+  border: 1px solid rgb(187, 187, 187);
+  background-color: rgb(186, 186, 186);
+
+  background-image: linear-gradient(rgb(186, 186, 186) 40%, rgb(235, 235, 235) 70%);
+}
+
+
+.qx-button:focus {
+  border: 1px solid rgb(61, 114, 201);
+}
+
+.qx-button img {
+  margin-left: 8px;
+  margin-right: 5px;
+}
+
+.qx-button img,span {
+  vertical-align: middle;
+}

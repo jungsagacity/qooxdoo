@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>domains</title>
+  <script type="text/javascript" src="script/domains.js"></script>
+  <link rel="stylesheet" type="text/css" href="toolbar.css"/>
+  <link rel="stylesheet" type="text/css" href="button.css"/>
+  <link rel="stylesheet" type="text/css" href="menu.css"/>
+  <link rel="stylesheet" type="text/css" href="rating.css"/>
+  <link rel="stylesheet" type="text/css" href="slider.css"/>
+  <style type="text/css" media="screen">
+    body {
+      padding: 0px;
+      margin: 0px;
+    }
+  </style>
+</head>
+<body>
+  <div id="desktop" style="width: 100%; height: 51px;"></div>
+
+  <div id="toolbar" style="display: none">
+    <button id="button" qx-class="qx.module.ui.Button"><span>Neu</span><img src="down.gif"></button>
+    <button disabled class="qx-menu-button"><span>Domain-Typ</span></button>
+    <button disabled class="qx-menu-button"><span>DNS</span></button>
+    <button><span>Subdomain löschen</span></button>
+    <button class="qx-menu-button"><span>Domain-Umzüge</span></button>
+    <button disabled class="qx-menu-button"><span>Google Sitemaps</span></button>
+    <button disabled><span>Info</span></button>
+    <button><span>Filter</span></button>
+    <button><span>Suche</span></button>
+  </div>
+
+  <table border="1" cellPadding="5" style="display: none; margin: 40px;">
+    <thead>
+      <tr>
+        <th><input type="checkbox"></th>
+        <th><a href="#" id="domain-names">Domain-Name</a> <span>&nbsp;&nbsp;</span></th>
+        <th>Domain-typ</th>
+        <th>Verwendungsart</th>
+        <th>Domain-Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input type="checkbox"></td>
+        <td>{{name}}</td>
+        <td>{{type}}</td>
+        <td>{{kind}}</td>
+        <td>{{status}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div id="rating" style="margin-left: 50px"></div>
+  <div id="rating-cloud" style="margin-left: 50px"></div>
+  <div id="rating-heart" style="margin-left: 50px"></div>
+
+
+  <div id="slider" style="display: none;"><div id="knob">0</div></div>
+
+  <ul id="menu" style="display: none;">
+    <li>abcabcabc</li>
+    <li>defdef</li>
+  </ul>
+</body>
+</html>
