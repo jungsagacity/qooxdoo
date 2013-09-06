@@ -12,7 +12,9 @@ qx.Bootstrap.define("qx.module.ui.Widget", {
      */
     create : function(html) {
       return new qx.module.ui.Widget(qxWeb.create(html));
-    }
+    },
+
+    _scroll : {}
   },
 
 
@@ -51,15 +53,12 @@ qx.Bootstrap.define("qx.module.ui.Widget", {
       }
       return this;
     },
-    
-    
+
     /*
     ---------------------------------------------------------------------------
       SCROLL SUPPORT
     ---------------------------------------------------------------------------
     */
-
-    _scroll : {},
 
     /**
      * Scrolls the given child element into view. Only scrolls children.
@@ -95,7 +94,7 @@ qx.Bootstrap.define("qx.module.ui.Widget", {
           align : align
         };
 
-        qx.module.Compat._scroll[this.$$hash] = this;
+        qx.module.ui.Widget._scroll[this.$$hash] = this;
         //qx.html.Element._scheduleFlush("element");
       }
 
@@ -137,7 +136,7 @@ qx.Bootstrap.define("qx.module.ui.Widget", {
           align : align
         };
 
-        qx.module.Compat._scroll[this.$$hash] = this;
+        qx.module.ui.Widget._scroll[this.$$hash] = this;
         //qx.html.Element._scheduleFlush("element");
       }
 
