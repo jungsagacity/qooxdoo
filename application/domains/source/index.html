@@ -9,6 +9,7 @@
   <link rel="stylesheet" type="text/css" href="menu.css"/>
   <link rel="stylesheet" type="text/css" href="rating.css"/>
   <link rel="stylesheet" type="text/css" href="slider.css"/>
+  <link rel="stylesheet" type="text/css" href="calendar.css"/>
   <style type="text/css" media="screen">
     body {
       padding: 0px;
@@ -31,7 +32,7 @@
     <button><span>Suche</span></button>
   </div>
 
-  <table border="1" cellPadding="5" style="display: none; margin: 40px;">
+  <table id="domains" border="1" cellPadding="5" style="display: none; margin: 40px; float: left;">
     <thead>
       <tr>
         <th><input type="checkbox"></th>
@@ -52,12 +53,15 @@
     </tbody>
   </table>
 
-  <div id="rating" style="margin-left: 50px"></div>
-  <div id="rating-cloud" style="margin-left: 50px"></div>
-  <div id="rating-heart" style="margin-left: 50px"></div>
+  <div style="margin-top: 20px;">
+    <div id="rating" style="margin-left: 50px"></div>
+    <div id="rating-cloud" style="margin-left: 50px"></div>
+    <div id="rating-heart" style="margin-left: 50px"></div>
+  </div>
 
+  <div id="slider" style="display: none; clear: both;"><div id="knob">0</div></div>
 
-  <div id="slider" style="display: none;"><div id="knob">0</div></div>
+  <div id="date" style="margin: 40px"></div>
 
   <ul id="menu" style="display: none;">
     <li>abcabcabc</li>

@@ -18,6 +18,7 @@
  * @require(qx.module.ui.Rating)
  * @require(qx.module.ui.Slider)
  * @require(qx.module.util.Type)
+ * @require(qx.module.ui.Calendar)
  */
 qx.Class.define("domains.Application",
 {
@@ -116,11 +117,11 @@ qx.Class.define("domains.Application",
         {name: "123", type: "234", kind: "345", status: "456"}
       ];
 
-      var template = q("tbody").getHtml();
-      q("tbody").getChildren().remove();
+      var template = q("#domains tbody").getHtml();
+      q("#domains tbody").getChildren().remove();
       for (var i = 0; i < data.length; i++) {
         var html = q.template.render(template, data[i]);
-        q.create(html).appendTo("tbody");
+        q.create(html).appendTo("#domains tbody");
       }
 
       // sorting
@@ -140,9 +141,9 @@ qx.Class.define("domains.Application",
         q("tbody").find("input").setAttribute("checked", e.target.checked);
       });
 
-      q("table").find("[type=checkbox]").on("change", function(e) {
+      q("#domains").find("[type=checkbox]").on("change", function(e) {
         var checked = false;
-        q("table").find("[type=checkbox]").forEach(function(item) {
+        q("#domains").find("[type=checkbox]").forEach(function(item) {
           checked = checked || q(item).getAttribute("checked");
         });
         disabledCollection.setEnabled(checked);
@@ -162,9 +163,15 @@ qx.Class.define("domains.Application",
         q("#knob").setHtml(e + "");
       });
 
+
+      q("#date").calendar(new Date(2013, 8, 3)).on("changeValue", function(e) {
+        console.log("New Date:" + e);
+      });
+
+
       // TADA!!!
       toolbar.setStyle("display", "block");
-      q("table").setStyle("display", "table");
+      q("#domains").setStyle("display", "table");
     }
   }
 });

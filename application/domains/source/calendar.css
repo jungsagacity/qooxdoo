@@ -1,0 +1,79 @@
+.qx-calendar table {
+  border-width: 1px;
+  border-color: #666666;
+  border-collapse: collapse;
+  text-align: center;
+  border-spacing: 0;
+}
+
+.qx-calendar button {
+  cursor: pointer;
+}
+
+.qx-calendar button:focus {
+  
+  
+  
+  
+}
+
+
+.qx-calendar thead {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #666666;
+  background-color: #dedede;
+  font-weight: bold;
+}
+
+.qx-calendar .othermonth button {
+  color: #aaa;
+}
+
+.qx-calendar .today {
+  background-color: #eee;
+}
+
+.qx-calendar .selected {
+  background-color: rgb(34, 68, 187);
+}
+
+.qx-calendar .selected button {
+  color: white;
+}
+
+.qx-calendar thead td {
+  padding: 2px 6px;
+  width: 14.3%;
+}
+
+.qx-calendar td {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #666666;
+  background-color: #ffffff;
+}
+
+.qx-calendar td button {
+  margin: 0;
+  width: 100%;
+  line-height: 2;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.qx-calendar thead tr:first-child td:first-child {
+  border-right: 0;
+}
+
+.qx-calendar thead tr:first-child td:nth-child(2) {
+  border-left: 0;
+  border-right: 0;
+  text-align: center;
+}
+
+.qx-calendar thead tr:first-child td:last-child {
+  border-left: 0;
+  text-align: right;
+}
