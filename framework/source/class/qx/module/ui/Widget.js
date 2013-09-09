@@ -26,6 +26,39 @@ qx.Bootstrap.define("qx.module.ui.Widget", {
 
 
   members : {
+    setTemplate : function(name, template) {
+      this.forEach(function(item) {
+        if (!item.templates) {
+          item.templates = {};
+        }
+        item.templates[name] = template;
+      });
+    },
+
+
+    getTemplate : function(name) {
+      var templates = this.getProperty("templates");
+      var template;
+
+      if (templates) {
+        template = templates[name];
+      }
+
+      if (!template && this.constructor._templates) {
+        return this.constructor._templates[name];
+      }
+
+      return template;
+    },
+
+
+
+
+
+
+    // ////////////
+    // TODO cleanup!!!
+    // ////////////
     capture : function() {},
     releaseCapture : function() {},
     activate : function() {},
